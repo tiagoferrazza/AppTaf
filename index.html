@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>TAF Bip</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <!-- Tela 1: Seleção de Sexo -->
+    <div id="tela-selecao" class="tela ativa">
+        <div class="container">
+            <h1 class="titulo">TAF BIP</h1>
+            <p class="subtitulo">Teste de Aptidão Física</p>
+
+            <p class="instrucao">Selecione o teste:</p>
+
+            <button class="btn-selecao" onclick="selecionarTeste('masculino')">
+                <span class="icone">♂</span>
+                <span class="texto">MASCULINO</span>
+                <span class="detalhe">até estágio 8</span>
+            </button>
+
+            <button class="btn-selecao" onclick="selecionarTeste('feminino')">
+                <span class="icone">♀</span>
+                <span class="texto">FEMININO</span>
+                <span class="detalhe">até estágio 7</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tela 2: Teste (Aguardando / Em Execução) -->
+    <div id="tela-teste" class="tela">
+        <div class="container">
+            <div class="info-teste">
+                <div class="estagio-container">
+                    <span class="label">ESTÁGIO</span>
+                    <span id="estagio-atual" class="valor-grande">1</span>
+                </div>
+
+                <div class="bip-container">
+                    <span class="label">BIP</span>
+                    <div class="bip-display">
+                        <span id="bip-atual" class="valor-grande">0</span>
+                        <span class="separador">/</span>
+                        <span id="bip-total" class="valor-grande">7</span>
+                    </div>
+                </div>
+
+                <div class="tempo-container">
+                    <span id="tempo" class="tempo">00:00</span>
+                </div>
+
+                <div class="velocidade-container">
+                    <span class="icone-velocidade">🏃</span>
+                    <span id="velocidade" class="velocidade">8,5 km/h</span>
+                </div>
+            </div>
+
+            <div id="controles-aguardando" class="controles">
+                <button id="btn-iniciar" class="btn-principal" onclick="iniciarContagem()">
+                    INICIAR
+                </button>
+                <button class="btn-voltar" onclick="voltarSelecao()">
+                    ← Voltar
+                </button>
+            </div>
+
+            <div id="controles-executando" class="controles escondido">
+                <div class="botoes-linha">
+                    <button id="btn-pausar" class="btn-secundario" onclick="pausarTeste()">
+                        PAUSAR
+                    </button>
+                    <button class="btn-parar" onclick="pararTeste()">
+                        PARAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela 3: Contagem Regressiva -->
+    <div id="tela-contagem" class="tela">
+        <div class="container contagem-container">
+            <span id="numero-contagem" class="numero-contagem">3</span>
+            <span class="texto-contagem">Prepare-se...</span>
+        </div>
+    </div>
+
+    <!-- Tela 4: Teste Finalizado -->
+    <div id="tela-finalizado" class="tela">
+        <div class="container">
+            <h2 class="titulo-fim">TESTE FINALIZADO</h2>
+
+            <div class="resultado">
+                <div class="resultado-item">
+                    <span class="resultado-label">Estágio alcançado</span>
+                    <span id="resultado-estagio" class="resultado-valor">8</span>
+                </div>
+                <div class="resultado-item">
+                    <span class="resultado-label">Último bip</span>
+                    <span id="resultado-bip" class="resultado-valor">10</span>
+                </div>
+                <div class="resultado-item">
+                    <span class="resultado-label">Tempo total</span>
+                    <span id="resultado-tempo" class="resultado-valor">05:30</span>
+                </div>
+            </div>
+
+            <button class="btn-principal" onclick="voltarSelecao()">
+                NOVO TESTE
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

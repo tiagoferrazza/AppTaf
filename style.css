@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-fundo: #1a1a2e;
+    --cor-fundo-clara: #16213e;
+    --cor-primaria: #e94560;
+    --cor-secundaria: #0f3460;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #a0a0a0;
+    --cor-sucesso: #4ade80;
+    --cor-alerta: #fbbf24;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* Telas */
+.tela {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.tela.ativa {
+    display: flex;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+/* Tela Seleção */
+.titulo {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    margin-bottom: 5px;
+    letter-spacing: 4px;
+}
+
+.subtitulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 50px;
+}
+
+.instrucao {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: var(--cor-texto-secundario);
+}
+
+.btn-selecao {
+    width: 100%;
+    padding: 25px 20px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--cor-secundaria), var(--cor-fundo-clara));
+    border: 2px solid var(--cor-secundaria);
+    border-radius: 16px;
+    color: var(--cor-texto);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-selecao:active {
+    transform: scale(0.98);
+    border-color: var(--cor-primaria);
+}
+
+.btn-selecao .icone {
+    font-size: 2rem;
+}
+
+.btn-selecao .texto {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.btn-selecao .detalhe {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* Tela Teste */
+.info-teste {
+    width: 100%;
+    text-align: center;
+}
+
+.estagio-container,
+.bip-container {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+}
+
+.valor-grande {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--cor-texto);
+}
+
+.bip-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.separador {
+    font-size: 2.5rem;
+    color: var(--cor-texto-secundario);
+}
+
+.tempo-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: var(--cor-fundo-clara);
+    border-radius: 16px;
+}
+
+.tempo {
+    font-size: 3.5rem;
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+}
+
+.velocidade-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.icone-velocidade {
+    font-size: 1.5rem;
+}
+
+.velocidade {
+    font-size: 1.4rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* Controles */
+.controles {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-principal {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: var(--cor-primaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-principal:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+.btn-voltar {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--cor-texto-secundario);
+    border: none;
+    cursor: pointer;
+}
+
+.botoes-linha {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-secundario {
+    flex: 1;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: var(--cor-secundaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secundario:active {
+    transform: scale(0.98);
+}
+
+.btn-parar {
+    flex: 1;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-parar:active {
+    transform: scale(0.98);
+    background: var(--cor-primaria);
+    color: var(--cor-texto);
+}
+
+.escondido {
+    display: none !important;
+}
+
+/* Tela Contagem */
+.contagem-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.numero-contagem {
+    font-size: 12rem;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.texto-contagem {
+    font-size: 1.5rem;
+    color: var(--cor-texto-secundario);
+    margin-top: 20px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Tela Finalizado */
+.titulo-fim {
+    font-size: 1.8rem;
+    color: var(--cor-sucesso);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.resultado {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.resultado-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: var(--cor-fundo-clara);
+    border-radius: 12px;
+}
+
+.resultado-label {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+}
+
+.resultado-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Animação de bip */
+.bip-flash {
+    animation: flash 0.3s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        background-color: var(--cor-primaria);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* Efeito de mudança de estágio */
+.estagio-novo {
+    animation: estagioNovo 0.5s ease-out;
+}
+
+@keyframes estagioNovo {
+    0% {
+        transform: scale(1.3);
+        color: var(--cor-sucesso);
+    }
+    100% {
+        transform: scale(1);
+        color: var(--cor-texto);
+    }
+}
+
+/* Safe area para iPhone com notch */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .container {
+        padding-top: calc(40px + env(safe-area-inset-top));
+        padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+}
