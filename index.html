@@ -66,6 +66,9 @@
                 <button id="btn-iniciar" class="btn-principal" onclick="iniciarContagem()">
                     INICIAR
                 </button>
+                <button class="btn-link" onclick="mostrarTabela()">
+                    Ver tabela de estágios
+                </button>
                 <button class="btn-voltar" onclick="voltarSelecao()">
                     ← Voltar
                 </button>
@@ -89,6 +92,34 @@
         <div class="container contagem-container">
             <span id="numero-contagem" class="numero-contagem">3</span>
             <span class="texto-contagem">Prepare-se...</span>
+        </div>
+    </div>
+
+    <!-- Tela 5: Tabela de Estágios -->
+    <div id="tela-tabela" class="tela">
+        <div class="container container-tabela">
+            <h2 class="titulo-tabela">Tabela de Estágios</h2>
+            <p id="tabela-subtitulo" class="subtitulo-tabela">Masculino - até estágio 8</p>
+
+            <div class="tabela-scroll">
+                <table class="tabela-estagios">
+                    <thead>
+                        <tr>
+                            <th>Estágio</th>
+                            <th>Velocidade</th>
+                            <th>Tempo/Bip</th>
+                            <th>Bips</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-corpo">
+                        <!-- Preenchido via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="btn-voltar" onclick="fecharTabela()">
+                ← Voltar
+            </button>
         </div>
     </div>
 

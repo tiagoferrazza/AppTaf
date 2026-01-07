@@ -352,6 +352,73 @@ html, body {
     }
 }
 
+/* Botão link */
+.btn-link {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--cor-primaria);
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Tela Tabela */
+.container-tabela {
+    justify-content: flex-start;
+    padding-top: 30px;
+}
+
+.titulo-tabela {
+    font-size: 1.5rem;
+    color: var(--cor-texto);
+    margin-bottom: 5px;
+}
+
+.subtitulo-tabela {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 25px;
+}
+
+.tabela-scroll {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.tabela-estagios {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.tabela-estagios th,
+.tabela-estagios td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--cor-secundaria);
+}
+
+.tabela-estagios th {
+    background: var(--cor-secundaria);
+    color: var(--cor-texto);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.tabela-estagios tr:nth-child(even) {
+    background: var(--cor-fundo-clara);
+}
+
+.tabela-estagios td:first-child {
+    font-weight: 700;
+    color: var(--cor-primaria);
+}
+
 /* Safe area para iPhone com notch */
 @supports (padding-top: env(safe-area-inset-top)) {
     .container {

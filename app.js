@@ -51,7 +51,10 @@ const elementos = {
     btnPausar: document.getElementById('btn-pausar'),
     resultadoEstagio: document.getElementById('resultado-estagio'),
     resultadoBip: document.getElementById('resultado-bip'),
-    resultadoTempo: document.getElementById('resultado-tempo')
+    resultadoTempo: document.getElementById('resultado-tempo'),
+    telaTabela: document.getElementById('tela-tabela'),
+    tabelaCorpo: document.getElementById('tabela-corpo'),
+    tabelaSubtitulo: document.getElementById('tabela-subtitulo')
 };
 
 // Contexto de áudio
@@ -183,6 +186,7 @@ function mostrarTela(tela) {
     elementos.telaTeste.classList.remove('ativa');
     elementos.telaContagem.classList.remove('ativa');
     elementos.telaFinalizado.classList.remove('ativa');
+    elementos.telaTabela.classList.remove('ativa');
     tela.classList.add('ativa');
 }
 
@@ -416,6 +420,37 @@ function voltarSelecao() {
     resetarEstado();
     liberarTela();
     mostrarTela(elementos.telaSelecao);
+}
+
+// Mostrar tabela de estágios
+function mostrarTabela() {
+    const estagioMax = CONFIG[estado.sexo].estagioMax;
+    const sexoTexto = estado.sexo === 'masculino' ? 'Masculino' : 'Feminino';
+
+    elementos.tabelaSubtitulo.textContent = `${sexoTexto} - até estágio ${estagioMax}`;
+
+    // Limpar tabela
+    elementos.tabelaCorpo.innerHTML = '';
+
+    // Preencher tabela com os estágios do sexo selecionado
+    for (let i = 0; i < estagioMax; i++) {
+        const estagio = ESTAGIOS[i];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${estagio.estagio}</td>
+            <td>${estagio.velocidade.toFixed(1).replace('.', ',')} km/h</td>
+            <td>${estagio.tempoBip.toFixed(2).replace('.', ',')}s</td>
+            <td>${estagio.trajetos}</td>
+        `;
+        elementos.tabelaCorpo.appendChild(tr);
+    }
+
+    mostrarTela(elementos.telaTabela);
+}
+
+// Fechar tabela
+function fecharTabela() {
+    mostrarTela(elementos.telaTeste);
 }
 
 // Registrar Service Worker

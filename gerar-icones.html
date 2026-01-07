@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Ícones TAF Bip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        canvas {
+            border: 1px solid #333;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ícones TAF Bip</h1>
+    <p>Clique nos botões para baixar os ícones:</p>
+
+    <div>
+        <canvas id="icon192" width="192" height="192"></canvas>
+        <canvas id="icon512" width="512" height="512"></canvas>
+    </div>
+
+    <div>
+        <button onclick="baixar('icon192', 'icon-192.png')">Baixar 192x192</button>
+        <button onclick="baixar('icon512', 'icon-512.png')">Baixar 512x512</button>
+    </div>
+
+    <script>
+        function desenharIcone(canvasId, tamanho) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Fundo
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, tamanho, tamanho);
+
+            // Círculo externo
+            const centro = tamanho / 2;
+            const raio = tamanho * 0.4;
+
+            ctx.beginPath();
+            ctx.arc(centro, centro, raio, 0, Math.PI * 2);
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = tamanho * 0.05;
+            ctx.stroke();
+
+            // Pessoa correndo (simplificado)
+            ctx.fillStyle = '#e94560';
+
+            // Cabeça
+            const cabecaRaio = tamanho * 0.08;
+            ctx.beginPath();
+            ctx.arc(centro - tamanho * 0.05, centro - tamanho * 0.15, cabecaRaio, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Corpo
+            ctx.beginPath();
+            ctx.lineWidth = tamanho * 0.04;
+            ctx.strokeStyle = '#e94560';
+            ctx.lineCap = 'round';
+
+            // Tronco
+            ctx.moveTo(centro - tamanho * 0.05, centro - tamanho * 0.07);
+            ctx.lineTo(centro + tamanho * 0.05, centro + tamanho * 0.08);
+            ctx.stroke();
+
+            // Perna frente
+            ctx.beginPath();
+            ctx.moveTo(centro + tamanho * 0.05, centro + tamanho * 0.08);
+            ctx.lineTo(centro + tamanho * 0.18, centro + tamanho * 0.02);
+            ctx.stroke();
+
+            // Perna trás
+            ctx.beginPath();
+            ctx.moveTo(centro + tamanho * 0.05, centro + tamanho * 0.08);
+            ctx.lineTo(centro - tamanho * 0.12, centro + tamanho * 0.2);
+            ctx.stroke();
+
+            // Braço frente
+            ctx.beginPath();
+            ctx.moveTo(centro - tamanho * 0.02, centro - tamanho * 0.02);
+            ctx.lineTo(centro + tamanho * 0.12, centro - tamanho * 0.12);
+            ctx.stroke();
+
+            // Braço trás
+            ctx.beginPath();
+            ctx.moveTo(centro - tamanho * 0.02, centro - tamanho * 0.02);
+            ctx.lineTo(centro - tamanho * 0.15, centro + tamanho * 0.05);
+            ctx.stroke();
+        }
+
+        function baixar(canvasId, nomeArquivo) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = nomeArquivo;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Desenhar os ícones
+        desenharIcone('icon192', 192);
+        desenharIcone('icon512', 512);
+    </script>
+</body>
+</html>
