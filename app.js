@@ -56,6 +56,7 @@ const elementos = {
 
 // Contexto de áudio
 let audioContext = null;
+let audioDesbloqueado = false;
 
 // Inicializar áudio
 function inicializarAudio() {
@@ -66,6 +67,33 @@ function inicializarAudio() {
         audioContext.resume();
     }
 }
+
+// Desbloquear áudio no iOS (precisa ser chamado em resposta a toque do usuário)
+function desbloquearAudio() {
+    if (audioDesbloqueado) return;
+
+    inicializarAudio();
+
+    // Toca um som silencioso para desbloquear
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    // Volume zero (silencioso)
+    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+
+    audioDesbloqueado = true;
+    console.log('Áudio desbloqueado!');
+}
+
+// Desbloquear áudio no primeiro toque em qualquer lugar
+document.addEventListener('touchstart', desbloquearAudio, { once: true });
+document.addEventListener('click', desbloquearAudio, { once: true });
 
 // Tocar bip normal
 function tocarBip() {
