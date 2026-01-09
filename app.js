@@ -98,8 +98,8 @@ function desbloquearAudio() {
 document.addEventListener('touchstart', desbloquearAudio, { once: true });
 document.addEventListener('click', desbloquearAudio, { once: true });
 
-// Tocar bip normal
-function tocarBip() {
+// Tocar bip da contagem regressiva (som original)
+function tocarBipContagem() {
     if (!audioContext) return;
 
     const oscillator = audioContext.createOscillator();
@@ -116,6 +116,43 @@ function tocarBip() {
 
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.2);
+}
+
+// Tocar bip normal (som de buzina)
+function tocarBip() {
+    if (!audioContext) return;
+
+    const currentTime = audioContext.currentTime;
+
+    // Oscilador principal - onda quadrada para som de buzina
+    const osc1 = audioContext.createOscillator();
+    const gain1 = audioContext.createGain();
+    osc1.connect(gain1);
+    gain1.connect(audioContext.destination);
+    osc1.type = 'square';
+    osc1.frequency.setValueAtTime(380, currentTime);
+
+    // Segundo oscilador para dar corpo ao som
+    const osc2 = audioContext.createOscillator();
+    const gain2 = audioContext.createGain();
+    osc2.connect(gain2);
+    gain2.connect(audioContext.destination);
+    osc2.type = 'sawtooth';
+    osc2.frequency.setValueAtTime(382, currentTime);
+
+    // Envelope de volume para buzina
+    gain1.gain.setValueAtTime(0.3, currentTime);
+    gain1.gain.setValueAtTime(0.3, currentTime + 0.4);
+    gain1.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.5);
+
+    gain2.gain.setValueAtTime(0.15, currentTime);
+    gain2.gain.setValueAtTime(0.15, currentTime + 0.4);
+    gain2.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.5);
+
+    osc1.start(currentTime);
+    osc1.stop(currentTime + 0.5);
+    osc2.start(currentTime);
+    osc2.stop(currentTime + 0.5);
 }
 
 // Tocar bip de mudança de estágio (diferente)
@@ -145,6 +182,22 @@ function tocarBipEstagio() {
     gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.35);
     osc2.start(audioContext.currentTime + 0.15);
     osc2.stop(audioContext.currentTime + 0.35);
+}
+
+// Falar volta atual usando síntese de voz
+function falarVolta(volta) {
+    if ('speechSynthesis' in window) {
+        // Cancelar fala anterior se ainda estiver falando
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(`volta ${volta}`);
+        utterance.lang = 'pt-BR';
+        utterance.rate = 1.2;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        speechSynthesis.speak(utterance);
+    }
 }
 
 // Vibrar
@@ -243,7 +296,7 @@ function iniciarContagem() {
     mostrarTela(elementos.telaContagem);
     manterTelaLigada();
 
-    let contagem = 3;
+    let contagem = 5;
     elementos.numeroContagem.textContent = contagem;
 
     const intervalo = setInterval(() => {
@@ -251,7 +304,7 @@ function iniciarContagem() {
 
         if (contagem > 0) {
             elementos.numeroContagem.textContent = contagem;
-            tocarBip();
+            tocarBipContagem();
             vibrar();
         } else {
             clearInterval(intervalo);
@@ -320,6 +373,11 @@ function executarBip() {
     }
 
     atualizarDisplay();
+
+    // Falar volta atual após a buzina (delay de 600ms para não sobrepor)
+    setTimeout(() => {
+        falarVolta(estado.bipAtual);
+    }, 600);
 
     // Flash visual
     document.body.classList.add('bip-flash');

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'taf-bip-v2';
+const CACHE_NAME = 'taf-bip-v3';
 const urlsToCache = [
     './',
     './index.html',
